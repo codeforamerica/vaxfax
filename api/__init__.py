@@ -1,3 +1,7 @@
+'''Top level api folder, for holding the api library
+'''
+
+
 from flask import Flask
 from flask.ext.restful import (
     Api,
