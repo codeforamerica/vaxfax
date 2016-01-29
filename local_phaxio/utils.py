@@ -1,3 +1,12 @@
+from phaxio import PhaxioApi
+import os
+
+phaxio_api_key    = os.environ.get('PHAXIO_API_KEY')
+phaxio_api_secret = os.environ.get('PHAXIO_API_SECRET')
+health_fax_number = os.environ.get('HEALTH_FAX_NUMBER')
+
+api = PhaxioApi(phaxio_api_key, phaxio_api_secret)
+api.health_fax_number = health_fax_number
 
 
 def create_header_string():
@@ -5,6 +14,7 @@ def create_header_string():
             "Missouri Health Department's FaxVax Service. "
             "If you have any questions fulfiling it, "
             "please contact us at __________.")
+
 
 def get_key_from_tuple_list(key: str, string_map: list=[]) -> tuple:
     return_tuple = next(
@@ -40,17 +50,26 @@ def build_string_from_dict(input_data: dict, string_map: list=[]) -> str:
 
 def create_faxio_string(input_data: dict) -> str:
     required_fields = [
-    "child_name", "child_year", "child_month",
-    "child_day", "school_district", "school_name",
-    "school_fax", "requestor_name", "requestor_phone"
+    "child_name", "child_dob", "school_district", "school_name",
+    "school_fax", "requestor_name", "requestor_contact"
     ]
     missing_fields = [field for field in required_fields
                       if field not in input_data]
     if any(missing_fields):
         raise ValueError("The input was missing the following fields: {0}"
             .format(missing_fields))
-    ("Child's Name: {0}\nChild's DOB: {1}/{2}/{3}\n"
-     "School District: {4}\nSchool Name: {5}\n"
-     "School Fax: {6}\nRequestor Name: {7}\n"
-     "Requestor Phone: {8}").format()
-    return ''
+    string_map = [
+        ("child_name", "Child Name"),
+        ("child_dob", "Child DOB"),
+        ("school_district", "School District"),
+        ("school_name", "School Name"),
+        ("school_fax", "School Fax"),
+        ("requestor_name", "Requestor Name"),
+        ("requestor_contact", "Requestor Contact Info")
+    ]
+    return build_string_from_dict(input_data, string_map)
+
+def make_faxio_request(fax_info_dict: dict) -> str:
+    fax_info_dict['string_data_type'] = 'text'
+    fax_info_dict['to'] = [api.health_fax_number]
+    return api.send(**fax_info_dict)
