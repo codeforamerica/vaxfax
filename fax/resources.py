@@ -1,6 +1,11 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
 import json
+from local_phaxio.utils import (
+    make_faxio_request,
+    build_faxio_request,
+)
+
 
 class FaxResource(Resource):
     def post(self):
