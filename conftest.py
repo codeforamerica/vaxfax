@@ -4,6 +4,8 @@ import os
 from local_phaxio.utils import (
     api,
 )
+import random
+
 
 @pytest.fixture(autouse=True)
 def setup_of_environment_variables():
@@ -11,6 +13,35 @@ def setup_of_environment_variables():
     api.api_secret = "c41b4eff5dce1573b3d925214de66b24ee73b83e"
     api.health_fax_number = "415-789-4127"
     return
+
+
+@pytest.fixture()
+def valid_fax_info():
+    return {
+        "child_name": "Banjo Edelman",
+        "child_dob": "08/01/2010",
+        "school_district": "KCP 33",
+        "school_name": "Faxon Elementary School",
+        "school_fax": "555-555-5556",
+        "requestor_name": "Rachel Edelman",
+        "requestor_contact": "555-555-5555"
+    }
+
+
+@pytest.fixture()
+def valid_info_dict():
+    info_dict = {}
+    info_dict['string_data'] = ("Child Name: Banjo Edelman\n"
+                                "Child DOB: 08/01/2010\nSchool District: "
+                                "KCP 33\nSchool Name: Faxon Elementary "
+                                "School\nSchool Fax: 555-555-5556\n"
+                                "Requestor Name: Rachel Edelman\nRequestor "
+                                "Contact Info: 555-555-5555")
+    info_dict['header_text'] = ("Youth Application for Vaccination Records")
+    info_dict['tag[request_id]'] = str(random.randint(1, 1000))
+    return info_dict
+
+
 #
 # @pytest.fixture(autouse=True)
 # def setup_of_environment_variables(request):
