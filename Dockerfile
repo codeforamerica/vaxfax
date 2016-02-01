@@ -14,6 +14,7 @@ RUN apt-install libffi-dev libssl-dev
 RUN echo '####################'
 RUN pip3 --version
 RUN python3 --version
+RUN pip3 install --upgrade setuptools
 RUN echo '####################'
 
 
