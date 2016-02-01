@@ -1,6 +1,8 @@
 # Dockerfile
 FROM quay.io/aptible/ubuntu:14.04
 
+ENV PYTHONIOENCODING UTF-8
+
 # Basic dependencies
 RUN apt-get update
 RUN apt-get upgrade -y
