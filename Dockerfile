@@ -1,6 +1,7 @@
 # Dockerfile
 FROM quay.io/aptible/ubuntu:14.04
 
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 ENV PYTHONIOENCODING UTF-8
 ENV SHELL /bin/bash
 
