@@ -22,11 +22,11 @@ RUN apt-get clean
 
 # Add requirements.txt ONLY, then run pip install, so that Docker cache won't
 # bust when changes are made to other repo files
-RUN pip install requests[security]
+RUN pip3 install requests[security]
 ADD requirements.txt /app/
 WORKDIR /app
 
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 # Add repo contents to image
 ADD . /app/
