@@ -6,6 +6,7 @@ RUN apt-install update
 RUN apt-install upgrade -y
 RUN apt-install python3.5 build-essential python3.5-dev python3-setuptools
 RUN apt-install libxml2-dev libxslt1-dev python3.5-dev python3-pip
+RUN apt-get install -y python3-pip  
 RUN apt-install libffi-dev libssl-dev
 
 RUN echo '####################'
