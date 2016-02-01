@@ -7,7 +7,7 @@ RUN apt-install libxml2-dev libxslt1-dev python3-dev python3-pip
 RUN apt-install libffi-dev libssl-dev
 
 RUN echo '####################'
-RUN pip --version
+# RUN pip --version
 RUN python --version
 RUN echo '####################'
 
