@@ -2,8 +2,10 @@
 FROM quay.io/aptible/ubuntu:14.04
 
 # Basic dependencies
-RUN apt-install build-essential python3-dev python-setuptools
-RUN apt-install libxml2-dev libxslt1-dev python3-dev python3-pip
+RUN apt-install update
+RUN apt-install upgrade -y
+RUN apt-install python3.5 build-essential python3.5-dev python-setuptools
+RUN apt-install libxml2-dev libxslt1-dev python3.5-dev python3-pip
 RUN apt-install libffi-dev libssl-dev
 
 RUN echo '####################'
@@ -14,6 +16,9 @@ RUN echo '####################'
 
 # PostgreSQL dev headers and client (uncomment if you use PostgreSQL)
 RUN apt-install libpq-dev postgresql-client-9.3 postgresql-contrib-9.3
+
+RUN apt-install autoremove
+RUN apt-install clean
 
 RUN easy_install pip
 RUN pip install requests[security]
