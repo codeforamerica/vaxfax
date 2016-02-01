@@ -4,7 +4,7 @@ FROM quay.io/aptible/ubuntu:14.04
 # Basic dependencies
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt-install python3.5 build-essential python3-dev python3-setuptools
+RUN apt-install python3 build-essential python3-dev python3-setuptools
 RUN apt-install libxml2-dev libxslt1-dev python3-dev python3-pip
 RUN apt-get install -y python3-pip
 RUN apt-install libffi-dev libssl-dev
