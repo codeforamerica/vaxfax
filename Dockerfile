@@ -15,7 +15,8 @@ RUN echo '####################'
 RUN pip3 --version
 RUN python3 --version
 RUN pip3 install --upgrade setuptools
-RUN apt-get install wget
+RUN apt-get update
+RUN apt-get install -y wget
 RUN echo '####################'
 
 # Get pyphaxio
