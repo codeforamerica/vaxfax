@@ -2,6 +2,7 @@
 FROM quay.io/aptible/ubuntu:14.04
 
 ENV PYTHONIOENCODING UTF-8
+ENV SHELL /bin/bash
 
 # Basic dependencies
 RUN apt-get update
