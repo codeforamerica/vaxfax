@@ -27,7 +27,7 @@ RUN wget https://pypi.python.org/packages/source/p/pyphaxio/pyphaxio-0.10.tar.gz
  && pushd pyphaxio-0.10 \
  && echo > README.rst \
  && python3 setup.py install \
- && rm -r pyphaxio-0.10{,.tar.gz}
+ && rm -r /pyphaxio-0.10{,.tar.gz}
 
 # PostgreSQL dev headers and client (uncomment if you use PostgreSQL)
 RUN apt-install libpq-dev postgresql-client-9.3 postgresql-contrib-9.3
