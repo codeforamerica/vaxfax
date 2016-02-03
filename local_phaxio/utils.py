@@ -26,6 +26,16 @@ def create_intro_string():
             "hear from you.\n\nRequest Information:\n")
 
 
+def create_legal_string(requestor_name: str, child_name: str) -> str:
+    return ("\n\n\nThis confirms that the requestor, "
+            "{0}, has agreed to the terms and conditions "
+            "and has signed the release form allowing "
+            "the Kansas City Health Department to release "
+            "{1}'s vaccination record via fax to the school "
+            "provided.".format(requestor_name, child_name)
+            )
+
+
 def get_key_from_tuple_list(key: str, string_map: list=[]) -> tuple:
     return_tuple = next(
         (
@@ -89,7 +99,11 @@ def make_faxio_request(fax_info_dict: dict) -> str:
 def build_faxio_request(submitted_data: dict) -> dict:
     info_dict = {}
     info_dict['header_text'] = create_header_string()
-    info_dict['string_data'] = create_intro_string() + \
+    body_string = create_intro_string() + \
         create_faxio_string(submitted_data)
+    requestor_name = submitted_data['requestor_name']
+    child_name = submitted_data['child_name']
+    body_string += create_legal_string(requestor_name, child_name)
+    info_dict['string_data'] = body_string
     info_dict['tag[request_id]'] = str(uuid.uuid4())
     return info_dict

@@ -40,9 +40,11 @@ class TestFaxResource:
     ):
         valid_fax_info = json.dumps(valid_fax_info)
         valid_info_dict['header_text'] = ('This is going to be super long'
-            'so that I am able to test a failure. Header text cannot be'
-            'as long as I am making this. Therefore, I am unsure what will'
-            'happen but I am hoping the failure will be handled')
+                                          'so that I am able to test a failure'
+                                          '. Header text cannot be as long as '
+                                          'I am making this. Therefore, I am '
+                                          'unsure what will happen but I am '
+                                          'hoping the failure will be handled')
         mock_build_function.return_value = valid_info_dict
         response = app.post("/fax", data=valid_fax_info)
         response_body = json.loads(response.data.decode())
