@@ -9,9 +9,9 @@ from werkzeug.exceptions import (
     BadRequest,
 )
 
+
 def decode_response_json(response_json: str) -> dict:
     return json.loads(response_json.decode('utf-8'))
-
 
 
 class FaxResource(Resource):
@@ -22,7 +22,7 @@ class FaxResource(Resource):
             response_data = make_faxio_request(phaxio_request_body)
             if not response_data.get('success', None):
                 abort(400, status="Failed", message="Issue with fax")
-            client_response  = {
+            client_response = {
                 "status": "Success!",
                 "fax_id": response_data['faxId']
             }
